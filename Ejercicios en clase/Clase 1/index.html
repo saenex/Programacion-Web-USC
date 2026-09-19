@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio</title>
+    <style>
+        .contenedor-perfil {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .contenedor-foto img {
+            width: 150px;
+            height: 150px;
+            object-fit: center;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="contenedor-perfil">
+            <div class="contenedor-foto">
+                <img src="images.jpg" alt="Foto de perfil">
+            </div>
+            <section>
+                <h1>Sobre mi</h1>
+                <p>Soy un Tecnologo en Sistemas de la Universidad Santiago de Cali, me gusta el hardware .</p>
+            </section>
+        </div>
+    </header>
+
+    <main>
+
+        <!--Seccion de Historial Academico-->
+        <section id="historial-academico">
+            <h1>Historial Academico</h1>
+            <p>Técnico en Sistemas - Nuevo Latir</p>
+            <p>tecnologo en Sistemas - Universidad Santiago de Cali</p>
+
+            <!-- Campo para agregar estudios-->
+            <div>
+                <input type="text" id="input-estudio" placeholder="Nuevo estudio...">
+                <button type="button" onclick="agregarEstudio()">Agregar</button>
+            </div>
+        </section>
+
+        <!--Seccion de Historial Laboral-->
+        <section>
+            <h1>Historial Laboral</h1>
+            <p>Programador y asistente en area de sistemas - FCecep - 2026</p>
+            <div>
+                <input type="text" id="input-trabajo" placeholder="Nuevo trabajo...">
+                <button type="button" onclick="agregarTrabajo()">Agregar</button>
+            </div>
+        </section>
+
+
+    </main>
+
+    <footer>
+        <h2>Programación Web&copy; 2026</h2>
+    </footer>
+</body>
+
+</html>
