@@ -1,0 +1,412 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg-page: #edf2f7;
+    --bg-card: #ffffff;
+    --text-navy-dark: #111827;
+    --text-navy-medium: #334155;
+    --text-muted: #64748b;
+    --color-accent-badge: #536b8e;
+    --color-divider: #e2e8f0;
+    --color-progress: #475569;
+}
+
+body.portfolio-body {
+    background-color: var(--bg-page);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--text-navy-medium);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* Barra superior: botón de edición y redes */
+.top-bar {
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+.btn-toggle-edicion {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #ffffff;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+    padding: 7px 15px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-toggle-edicion:hover {
+    background-color: #f8fafc;
+    color: #0f172a;
+    border-color: #94a3b8;
+}
+
+.btn-toggle-edicion.active {
+    background-color: #1e293b;
+    color: #ffffff;
+    border-color: #1e293b;
+    box-shadow: 0 2px 8px rgba(30, 41, 59, 0.25);
+}
+
+.social-icon {
+    width: 38px;
+    height: 38px;
+    background-color: #ffffff;
+    color: #475569;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    transition: all 0.2s ease;
+}
+
+.social-icon:hover {
+    background-color: var(--color-accent-badge);
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* Tarjeta principal estilo CV */
+.portfolio-card {
+    max-width: 860px;
+    background-color: var(--bg-card);
+    border-radius: 12px;
+    padding: 48px 52px;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+/* Avatar centrado */
+.avatar-container {
+    display: flex;
+    justify-content: center;
+}
+
+.avatar-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Títulos del encabezado */
+.user-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    color: var(--text-navy-dark);
+    margin-bottom: 4px;
+}
+
+.user-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    margin-bottom: 0;
+}
+
+/* Barra de contacto */
+.contact-bar {
+    border-top: 1px solid var(--color-divider);
+    border-bottom: 1px solid var(--color-divider);
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    font-weight: 500;
+}
+
+.contact-item {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.contact-item:hover {
+    color: var(--text-navy-dark);
+}
+
+.contact-item i {
+    color: var(--color-accent-badge);
+}
+
+/* Título de cada sección */
+.section-title h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: var(--text-navy-dark);
+    margin: 0;
+}
+
+.icon-badge {
+    width: 28px;
+    height: 28px;
+    background-color: var(--color-accent-badge);
+    color: #ffffff;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+/* Textos de secciones */
+.section-text {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-navy-medium);
+}
+
+.section-divider {
+    border: 0;
+    border-top: 1px solid var(--color-divider);
+    opacity: 1;
+    margin: 10px 0;
+}
+
+/* Listado de items */
+.item-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.portfolio-item {
+    padding: 8px 0;
+    border-bottom: 1px dashed rgba(226, 232, 240, 0.7);
+}
+
+.portfolio-item:last-child {
+    border-bottom: none;
+}
+
+.item-bullet {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-accent-badge);
+    margin-top: 6px;
+    flex-shrink: 0;
+}
+
+.item-heading {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-navy-dark);
+    margin: 0 0 2px 0;
+}
+
+.item-sub {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* Botones de acción en cada item */
+.item-actions {
+    flex-shrink: 0;
+}
+
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-modificar {
+    background-color: #f1f5f9;
+    color: #334155;
+    border-color: #cbd5e1;
+}
+
+.btn-modificar:hover {
+    background-color: #e2e8f0;
+    color: #0f172a;
+}
+
+.btn-guardar {
+    background-color: #16a34a;
+    color: #ffffff;
+    border-color: #16a34a;
+}
+
+.btn-guardar:hover {
+    background-color: #15803d;
+    color: #ffffff;
+}
+
+.btn-eliminar {
+    background-color: #fee2e2;
+    color: #dc2626;
+    border-color: #fecaca;
+}
+
+.btn-eliminar:hover:not(:disabled) {
+    background-color: #dc2626;
+    color: #ffffff;
+}
+
+.btn-eliminar:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background-color: #f1f5f9;
+    color: #94a3b8;
+    border-color: #e2e8f0;
+}
+
+/* Badge de archivo PDF */
+.badge-pdf {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background-color: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 5px;
+    transition: all 0.2s ease;
+}
+
+.badge-pdf:hover {
+    background-color: #ef4444;
+    color: #ffffff;
+    border-color: #ef4444;
+}
+
+/* Ocultar acciones y formularios si NO está activo el modo edición general */
+body:not(.modo-edicion-activo) .item-actions,
+body:not(.modo-edicion-activo) .formulario-agregar {
+    display: none !important;
+}
+
+/* Formulario de agregar */
+.formulario-agregar {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 14px;
+    margin-top: 14px;
+}
+
+.form-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-navy-dark);
+}
+
+.form-select,
+.form-control {
+    font-size: 0.85rem;
+    border-color: #cbd5e1;
+}
+
+.form-select:focus,
+.form-control:focus {
+    border-color: var(--color-accent-badge);
+    box-shadow: 0 0 0 0.2rem rgba(83, 107, 142, 0.2);
+}
+
+/* Barra de habilidades */
+.skill-name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-navy-dark);
+}
+
+.skill-percent {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+.custom-progress {
+    height: 6px;
+    background-color: #e2e8f0;
+    border-radius: 3px;
+}
+
+.custom-progress .progress-bar {
+    background-color: var(--color-progress);
+    border-radius: 3px;
+}
+
+/* Botón principal */
+.btn-navy {
+    background-color: #1e293b;
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 6px;
+    border: none;
+    transition: background-color 0.2s ease;
+}
+
+.btn-navy:hover {
+    background-color: #0f172a;
+    color: #ffffff;
+}
+
+/* Footer */
+.portfolio-footer p {
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+/* Ajustes Responsivos */
+@media (max-width: 768px) {
+    .portfolio-card {
+        padding: 30px 20px;
+    }
+
+    .user-name {
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+    }
+
+    .user-title {
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+    }
+
+    .contact-bar {
+        flex-direction: column;
+        gap: 8px !important;
+        align-items: center;
+    }
+
+    .portfolio-item {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .item-actions {
+        align-self: flex-end;
+    }
+}
