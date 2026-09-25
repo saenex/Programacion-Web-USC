@@ -4,322 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio</title>
-    <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- Estilos personalizados -->
+    <title>Cali Vigilante - Inicio</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="portfolio-body">
-    <div class="container py-4">
+<body id="body">
+    <header class="site-header">
+        <h1>Cali Vigilante</h1>
+        <p>Registro ciudadano d
+            e presuntos abusos de autoridad. <span id="contador-cabecera"
+                class="contador-badge"></span></p>
 
-        <!-- Barra superior: Botón de modificación a la izquierda y enlaces a la derecha -->
-        <div class="top-bar d-flex justify-content-between align-items-center mb-3">
-            <div>
-                <button type="button" id="btn-toggle-edicion" class="btn-toggle-edicion" onclick="toggleModoGeneralEdicion()">
-                    <i class="bi bi-pencil-square"></i> <span id="texto-btn-edicion">Modificar Portafolio</span>
-                </button>
-            </div>
-            <div class="d-flex gap-2">
-                <a href="https://github.com/saenex" target="_blank" class="social-icon" aria-label="GitHub"><i class="bi bi-github"></i></a>
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=miguel3519.delgado@gmail.com" target="_blank" class="social-icon" aria-label="Gmail"><i class="bi bi-envelope-fill"></i></a>
-            </div>
-        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="reportar.html">Reportar un caso</a></li>
+                <li><a href="casos.html">Ver casos registrados</a></li>
+                <li class="item-modo-oscuro"><button id="btn-modo-oscuro" class="btn-oscuro">Modo Oscuro</button></li>
+            </ul>
+        </nav>
+    </header>
 
-        <!-- Tarjeta principal del portafolio -->
-        <div class="portfolio-card shadow-sm mx-auto">
+    <main id="main-content">
+        <section id="intro">
+            <p>
+                Este sitio permite a la ciudadanía documentar presuntos casos de abuso
+                de autoridad ocurridos en la ciudad de Cali, con el fin de construir
+                un registro colectivo que sirva como memoria y evidencia.
+            </p>
+        </section>
+    </main>
 
-            <!-- Encabezado con foto y datos principales -->
-            <header class="portfolio-header text-center">
-                <div class="avatar-container mb-3">
-                    <img src="archivos/Logo.png" alt="Foto de perfil" class="avatar-img shadow-sm">
-                </div>
-                <h1 class="user-name">MIGUEL ANGEL DELGADO</h1>
-                <p class="user-title">TECNÓLOGO EN SISTEMAS</p>
-
-                <!-- Datos de contacto -->
-                <div class="contact-bar d-flex flex-wrap justify-content-center gap-4 py-3 my-3">
-                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=miguel3519.delgado@gmail.com" target="_blank" class="contact-item">
-                        <i class="bi bi-envelope-fill me-2"></i> miguel3519.delgado@gmail.com
-                    </a>
-                    <a href="https://github.com/saenex" target="_blank" class="contact-item">
-                        <i class="bi bi-github me-2"></i> github.com/saenex
-                    </a>
-                </div>
-            </header>
-
-            <!-- Cuerpo en dos columnas -->
-            <main class="row g-4 mt-1">
-
-                <!-- Columna Izquierda: Sobre mí y Experiencia Laboral -->
-                <div class="col-lg-7 d-flex flex-column gap-4">
-
-                    <!-- Sobre mí -->
-                    <section class="portfolio-section">
-                        <div class="section-title d-flex align-items-center gap-2 mb-3">
-                            <span class="icon-badge"><i class="bi bi-person-fill"></i></span>
-                            <h2>SOBRE MÍ</h2>
-                        </div>
-                        <p class="section-text">
-                            Soy un Tecnólogo en Sistemas de la Universidad Santiago de Cali, me gusta el hardware, el desarrollo web y el soporte de infraestructura informática.
-                        </p>
-                    </section>
-
-                    <hr class="section-divider">
-
-                    <!-- Historial Laboral -->
-                    <section id="historial-laboral" class="portfolio-section">
-                        <div class="section-title d-flex align-items-center gap-2 mb-3">
-                            <span class="icon-badge"><i class="bi bi-briefcase-fill"></i></span>
-                            <h2>HISTORIAL LABORAL</h2>
-                        </div>
-
-                        <div id="lista-laboral" class="item-list">
-                            <div class="portfolio-item d-flex justify-content-between align-items-start gap-2">
-                                <div class="d-flex align-items-start gap-2 flex-grow-1">
-                                    <span class="item-bullet"></span>
-                                    <div class="item-content flex-grow-1">
-                                        <h3 class="item-heading">Programador y asistente en área de sistemas</h3>
-                                        <p class="item-sub">FCecep &bull; 2026</p>
-                                    </div>
-                                </div>
-                                <div class="item-actions d-flex gap-1">
-                                    <button type="button" class="btn-action btn-modificar" onclick="toggleModificar(this)" title="Modificar">
-                                        <i class="bi bi-pencil-fill"></i> Modificar
-                                    </button>
-                                    <button type="button" class="btn-action btn-eliminar" disabled onclick="eliminarItem(this)" title="Eliminar (requiere habilitar modificación)">
-                                        <i class="bi bi-trash-fill"></i> Eliminar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Formulario para agregar experiencia laboral -->
-                        <div class="formulario-agregar">
-                            <h4 class="form-title mb-2">Agregar Experiencia Laboral</h4>
-                            <div class="row g-2 mb-2">
-                                <div class="col-md-6">
-                                    <input type="text" id="input-trabajo-cargo" class="form-control" placeholder="Cargo o puesto...">
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="text" id="input-trabajo-empresa" class="form-control" placeholder="Empresa / Periodo...">
-                                </div>
-                            </div>
-                            <div class="row g-2">
-                                <div class="col-md-7">
-                                    <select id="input-trabajo-pdf" class="form-select">
-                                        <option value="">Sin archivo PDF</option>
-                                        <option value="archivos/TÉCNICO EN SISTEMAS - SENA.pdf">TÉCNICO EN SISTEMAS - SENA.pdf</option>
-                                        <option value="archivos/Inteligencia Artificial Nivel Básico.pdf">Inteligencia Artificial Nivel Básico.pdf</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-5">
-                                    <button type="button" class="btn btn-navy w-100" onclick="agregarTrabajo()">
-                                        <i class="bi bi-plus-lg"></i> Agregar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-
-                <!-- Columna Derecha: Historial Académico y Habilidades -->
-                <div class="col-lg-5 d-flex flex-column gap-4">
-
-                    <!-- Historial Académico -->
-                    <section id="historial-academico" class="portfolio-section">
-                        <div class="section-title d-flex align-items-center gap-2 mb-3">
-                            <span class="icon-badge"><i class="bi bi-mortarboard-fill"></i></span>
-                            <h2>HISTORIAL ACADÉMICO</h2>
-                        </div>
-
-                        <div id="lista-academica" class="item-list">
-                            <div class="portfolio-item d-flex justify-content-between align-items-start gap-2">
-                                <div class="d-flex align-items-start gap-2 flex-grow-1">
-                                    <span class="item-bullet"></span>
-                                    <div class="item-content flex-grow-1">
-                                        <h3 class="item-heading">Tecnólogo en Sistemas</h3>
-                                        <p class="item-sub">Universidad Santiago de Cali</p>
-                                    </div>
-                                </div>
-                                <div class="item-actions d-flex gap-1">
-                                    <button type="button" class="btn-action btn-modificar" onclick="toggleModificar(this)" title="Modificar">
-                                        <i class="bi bi-pencil-fill"></i> Modificar
-                                    </button>
-                                    <button type="button" class="btn-action btn-eliminar" disabled onclick="eliminarItem(this)" title="Eliminar (requiere habilitar modificación)">
-                                        <i class="bi bi-trash-fill"></i> Eliminar
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="portfolio-item d-flex justify-content-between align-items-start gap-2">
-                                <div class="d-flex align-items-start gap-2 flex-grow-1">
-                                    <span class="item-bullet"></span>
-                                    <div class="item-content flex-grow-1">
-                                        <h3 class="item-heading">Especialización en Sistemas y Mantenimiento</h3>
-                                        <p class="item-sub">Sena - Institución Educativa Nuevo Latir</p>
-                                        <div>
-                                            <a href="archivos/TÉCNICO EN SISTEMAS - SENA.pdf" target="_blank" class="badge-pdf">
-                                                <i class="bi bi-file-earmark-pdf-fill"></i> TÉCNICO EN SISTEMAS - SENA.pdf
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-actions d-flex gap-1">
-                                    <button type="button" class="btn-action btn-modificar" onclick="toggleModificar(this)" title="Modificar">
-                                        <i class="bi bi-pencil-fill"></i> Modificar
-                                    </button>
-                                    <button type="button" class="btn-action btn-eliminar" disabled onclick="eliminarItem(this)" title="Eliminar (requiere habilitar modificación)">
-                                        <i class="bi bi-trash-fill"></i> Eliminar
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="portfolio-item d-flex justify-content-between align-items-start gap-2">
-                                <div class="d-flex align-items-start gap-2 flex-grow-1">
-                                    <span class="item-bullet"></span>
-                                    <div class="item-content flex-grow-1">
-                                        <h3 class="item-heading">Inteligencia Artificial Nivel Básico</h3>
-                                        <p class="item-sub">Certificación</p>
-                                        <div>
-                                            <a href="archivos/Inteligencia Artificial Nivel Básico.pdf" target="_blank" class="badge-pdf">
-                                                <i class="bi bi-file-earmark-pdf-fill"></i> Inteligencia Artificial Nivel Básico.pdf
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-actions d-flex gap-1">
-                                    <button type="button" class="btn-action btn-modificar" onclick="toggleModificar(this)" title="Modificar">
-                                        <i class="bi bi-pencil-fill"></i> Modificar
-                                    </button>
-                                    <button type="button" class="btn-action btn-eliminar" disabled onclick="eliminarItem(this)" title="Eliminar (requiere habilitar modificación)">
-                                        <i class="bi bi-trash-fill"></i> Eliminar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Formulario para agregar estudio / certificación -->
-                        <div class="formulario-agregar">
-                            <h4 class="form-title mb-2">Agregar Estudio / Certificación</h4>
-                            <div class="row g-2 mb-2">
-                                <div class="col-md-6">
-                                    <input type="text" id="input-estudio-titulo" class="form-control" placeholder="Título o curso...">
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="text" id="input-estudio-institucion" class="form-control" placeholder="Institución / Periodo...">
-                                </div>
-                            </div>
-                            <div class="row g-2">
-                                <div class="col-md-7">
-                                    <select id="input-estudio-pdf" class="form-select">
-                                        <option value="">Sin archivo PDF</option>
-                                        <option value="archivos/TÉCNICO EN SISTEMAS - SENA.pdf">TÉCNICO EN SISTEMAS - SENA.pdf</option>
-                                        <option value="archivos/Inteligencia Artificial Nivel Básico.pdf">Inteligencia Artificial Nivel Básico.pdf</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-5">
-                                    <button type="button" class="btn btn-navy w-100" onclick="agregarEstudio()">
-                                        <i class="bi bi-plus-lg"></i> Agregar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <hr class="section-divider">
-
-                    <!-- Tech Stack -->
-                    <section class="portfolio-section">
-                        <div class="section-title d-flex align-items-center gap-2 mb-3">
-                            <span class="icon-badge"><i class="bi bi-gear-fill"></i></span>
-                            <h2>TECH STACK</h2>
-                        </div>
-
-                        <div id="lista-habilidades">
-                            <div class="skill-item mb-3">
-                                <div class="skill-header-row d-flex justify-content-between align-items-center mb-1">
-                                    <span class="skill-name">Hardware & Ensamblaje</span>
-                                    <span class="skill-percent ms-auto me-2">90%</span>
-                                    <div class="item-actions d-flex gap-1">
-                                        <button type="button" class="btn-action btn-modificar" onclick="toggleModificarHabilidad(this)" title="Modificar">
-                                            <i class="bi bi-pencil-fill"></i> Modificar
-                                        </button>
-                                        <button type="button" class="btn-action btn-eliminar" disabled onclick="eliminarItem(this)" title="Eliminar (requiere habilitar modificación)">
-                                            <i class="bi bi-trash-fill"></i> Eliminar
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="progress custom-progress">
-                                    <div class="progress-bar" style="width: 90%"></div>
-                                </div>
-                            </div>
-
-                            <div class="skill-item mb-3">
-                                <div class="skill-header-row d-flex justify-content-between align-items-center mb-1">
-                                    <span class="skill-name">HTML & CSS</span>
-                                    <span class="skill-percent ms-auto me-2">80%</span>
-                                    <div class="item-actions d-flex gap-1">
-                                        <button type="button" class="btn-action btn-modificar" onclick="toggleModificarHabilidad(this)" title="Modificar">
-                                            <i class="bi bi-pencil-fill"></i> Modificar
-                                        </button>
-                                        <button type="button" class="btn-action btn-eliminar" disabled onclick="eliminarItem(this)" title="Eliminar (requiere habilitar modificación)">
-                                            <i class="bi bi-trash-fill"></i> Eliminar
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="progress custom-progress">
-                                    <div class="progress-bar" style="width: 80%"></div>
-                                </div>
-                            </div>
-
-                            <div class="skill-item mb-3">
-                                <div class="skill-header-row d-flex justify-content-between align-items-center mb-1">
-                                    <span class="skill-name">JavaScript</span>
-                                    <span class="skill-percent ms-auto me-2">70%</span>
-                                    <div class="item-actions d-flex gap-1">
-                                        <button type="button" class="btn-action btn-modificar" onclick="toggleModificarHabilidad(this)" title="Modificar">
-                                            <i class="bi bi-pencil-fill"></i> Modificar
-                                        </button>
-                                        <button type="button" class="btn-action btn-eliminar" disabled onclick="eliminarItem(this)" title="Eliminar (requiere habilitar modificación)">
-                                            <i class="bi bi-trash-fill"></i> Eliminar
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="progress custom-progress">
-                                    <div class="progress-bar" style="width: 70%"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Formulario para agregar habilidad -->
-                        <div class="formulario-agregar">
-                            <h4 class="form-title mb-2">Agregar Habilidad</h4>
-                            <div class="row g-2 mb-2">
-                                <div class="col-md-7">
-                                    <input type="text" id="input-habilidad-nombre" class="form-control" placeholder="Nombre (ej. Redes)...">
-                                </div>
-                                <div class="col-md-5">
-                                    <input type="number" id="input-habilidad-nivel" class="form-control" min="1" max="100" placeholder="Nivel % (ej. 85)">
-                                </div>
-                            </div>
-                            <button type="button" class="btn btn-navy w-100" onclick="agregarHabilidad()">
-                                <i class="bi bi-plus-lg"></i> Agregar Habilidad
-                            </button>
-                        </div>
-                    </section>
-                </div>
-
-            </main>
-
-            <!-- Footer -->
-            <footer class="portfolio-footer text-center mt-5 pt-4 border-top">
-                <p class="mb-0 text-muted">Programación Web &copy; 2026</p>
-            </footer>
-
-        </div>
-    </div>
+    <footer>
+        <p>Proyecto inicial - Programación Orientada a la Web - Universidad Santiago de Cali - 2026B</p>
+        <p>última actualización: Agosto 22 de 2026</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>

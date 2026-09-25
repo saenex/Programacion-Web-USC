@@ -1,412 +1,334 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
-
 :root {
-    --bg-page: #edf2f7;
-    --bg-card: #ffffff;
-    --text-navy-dark: #111827;
-    --text-navy-medium: #334155;
-    --text-muted: #64748b;
-    --color-accent-badge: #536b8e;
-    --color-divider: #e2e8f0;
-    --color-progress: #475569;
+  --color-fondo: #f4f5f7;
+  --color-primario: #072b3c;
+  --color-primario-oscuro: #19668f;
+  --color-texto: #212529;
+  --color-texto-secundario: #666666;
+  --color-tarjeta: #ffffff;
+  --color-tarjeta-caso: #ffffff;
+  --color-blanco: #ffffff;
+  --color-borde: #cccccc;
+  --color-input-fondo: #ffffff;
+  --color-error: #e74c3c;
+  --color-error-fondo: #fdf0ef;
+  --radio-borde: 8px;
+  --espaciado: 1rem;
 }
 
-body.portfolio-body {
-    background-color: var(--bg-page);
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    color: var(--text-navy-medium);
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
+* {
+  box-sizing: border-box;
 }
 
-/* Barra superior: botón de edición y redes */
-.top-bar {
-    max-width: 860px;
-    margin: 0 auto;
+/*Selectores: a que elementos, etiquetas, u objetos se aplica un estilo */
+
+/* Por tipo de elemento HTML */
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  line-height: 1.5;
 }
 
-.btn-toggle-edicion {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background-color: #ffffff;
-    color: #475569;
-    border: 1px solid #cbd5e1;
-    padding: 7px 15px;
-    border-radius: 8px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    cursor: pointer;
-    transition: all 0.2s ease;
+/* Selector por clase */
+.site-header {
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
+  padding: 1.5rem 2rem;
 }
 
-.btn-toggle-edicion:hover {
-    background-color: #f8fafc;
-    color: #0f172a;
-    border-color: #94a3b8;
+.site-header h1 {
+  margin: 0 0 0.25rem 0;
 }
 
-.btn-toggle-edicion.active {
-    background-color: #1e293b;
-    color: #ffffff;
-    border-color: #1e293b;
-    box-shadow: 0 2px 8px rgba(30, 41, 59, 0.25);
+.tagline {
+  margin: 0 0 1rem 0;
+  opacity: 0.9;
 }
 
-.social-icon {
-    width: 38px;
-    height: 38px;
-    background-color: #ffffff;
-    color: #475569;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    font-size: 0.95rem;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-    transition: all 0.2s ease;
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
 }
 
-.social-icon:hover {
-    background-color: var(--color-accent-badge);
-    color: #ffffff;
-    transform: translateY(-2px);
+.main-nav a {
+  color: var(--color-blanco);
+  text-decoration: none;
+  font-weight: 600;
 }
 
-/* Tarjeta principal estilo CV */
-.portfolio-card {
-    max-width: 860px;
-    background-color: var(--bg-card);
-    border-radius: 12px;
-    padding: 48px 52px;
-    border: 1px solid rgba(226, 232, 240, 0.8);
+.main-nav a:hover {
+  text-decoration: underline;
 }
 
-/* Avatar centrado */
-.avatar-container {
-    display: flex;
-    justify-content: center;
+main {
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-.avatar-img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid #ffffff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+section {
+  background-color: var(--color-tarjeta);
+  border-radius: var(--radio-borde);
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
-/* Títulos del encabezado */
-.user-name {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2rem;
-    font-weight: 800;
-    letter-spacing: 4px;
-    color: var(--text-navy-dark);
-    margin-bottom: 4px;
+#form-reporte {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 480px;
 }
 
-.user-title {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 3px;
-    color: var(--text-muted);
-    margin-bottom: 0;
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
 }
 
-/* Barra de contacto */
-.contact-bar {
-    border-top: 1px solid var(--color-divider);
-    border-bottom: 1px solid var(--color-divider);
-    color: var(--text-muted);
-    font-size: 0.82rem;
-    font-weight: 500;
+.campo label {
+  font-weight: 600;
+  font-size: 0.9rem;
 }
 
-.contact-item {
-    color: var(--text-muted);
-    text-decoration: none;
-    transition: color 0.2s ease;
+.campo input,
+.campo textarea,
+.campo select {
+  padding: 0.6rem;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-borde);
+  font: inherit;
+  background-color: var(--color-input-fondo);
+  color: var(--color-texto);
 }
 
-.contact-item:hover {
-    color: var(--text-navy-dark);
+button[type="submit"] {
+  align-self: flex-start;
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
+  border: none;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radio-borde);
+  font-weight: 600;
+  cursor: pointer;
 }
 
-.contact-item i {
-    color: var(--color-accent-badge);
+button[type="submit"]:hover {
+  background-color: var(--color-primario-oscuro);
 }
 
-/* Título de cada sección */
-.section-title h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 800;
-    letter-spacing: 2px;
-    color: var(--text-navy-dark);
-    margin: 0;
+/*Grilla de tarjetas con CSS Grid*/
+.casos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
 }
 
-.icon-badge {
-    width: 28px;
-    height: 28px;
-    background-color: var(--color-accent-badge);
-    color: #ffffff;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    flex-shrink: 0;
+.tarjeta-caso {
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-borde);
+  padding: 1rem;
+  background-color: var(--color-tarjeta-caso);
+  overflow-wrap: break-word;
 }
 
-/* Textos de secciones */
-.section-text {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: var(--text-navy-medium);
+.tarjeta-caso h3 {
+  margin-top: 0;
+  font-size: 1rem;
+  color: var(--color-primario-oscuro);
 }
 
-.section-divider {
-    border: 0;
-    border-top: 1px solid var(--color-divider);
-    opacity: 1;
-    margin: 10px 0;
+.tarjeta-caso .meta {
+  color: var(--color-texto-secundario);
 }
 
-/* Listado de items */
-.item-list {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+/*Pie de página*/
+footer,
+.site-footer {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--color-texto-secundario);
 }
 
-.portfolio-item {
-    padding: 8px 0;
-    border-bottom: 1px dashed rgba(226, 232, 240, 0.7);
+/* Pop-up de notificación */
+.notificacion-popup {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
+  padding: 1rem 1.5rem;
+  border-radius: var(--radio-borde);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  font-weight: 600;
+  z-index: 1000;
+
+  /* Centrado horizontalmente */
+  opacity: 0;
+  transform: translate(-50%, -20px);
+  transition: all 0.3s ease;
 }
 
-.portfolio-item:last-child {
-    border-bottom: none;
+/* El pop-up baja suavemente a su posición final */
+.notificacion-popup.mostrar {
+  opacity: 1;
+  transform: translate(-50%, 10px);
 }
 
-.item-bullet {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: var(--color-accent-badge);
-    margin-top: 6px;
-    flex-shrink: 0;
+/* Ajuste sutil para el modo oscuro */
+body.dark-mode .notificacion-popup {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
 }
 
-.item-heading {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--text-navy-dark);
-    margin: 0 0 2px 0;
+/*Contador en la cabecera */
+.contador-badge {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  margin-left: 0.5rem;
+  white-space: nowrap;
 }
 
-.item-sub {
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    margin: 0;
+/* Botón Ordenar */
+.btn-ordenar {
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  border: 1px solid var(--color-borde);
+  padding: 0.6rem 1rem;
+  border-radius: var(--radio-borde);
+  font-weight: 600;
+  cursor: pointer;
+  height: 42px;
+  transition: all 0.3s ease;
 }
 
-/* Botones de acción en cada item */
-.item-actions {
-    flex-shrink: 0;
+.btn-ordenar:hover {
+  background-color: var(--color-borde);
 }
 
-.btn-action {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 3px 8px;
-    border-radius: 5px;
-    border: 1px solid transparent;
-    cursor: pointer;
-    transition: all 0.2s ease;
+body.dark-mode .btn-ordenar {
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
+  border-color: var(--color-borde);
 }
 
-.btn-modificar {
-    background-color: #f1f5f9;
-    color: #334155;
-    border-color: #cbd5e1;
+body.dark-mode .btn-ordenar:hover {
+  background-color: var(--color-primario-oscuro);
 }
 
-.btn-modificar:hover {
-    background-color: #e2e8f0;
-    color: #0f172a;
+/* Validación visual de campos vacíos */
+#form-reporte.fue-validado input:invalid,
+#form-reporte.fue-validado textarea:invalid,
+#form-reporte.fue-validado select:invalid {
+  border: 2px solid var(--color-error);
+  background-color: var(--color-error-fondo);
 }
 
-.btn-guardar {
-    background-color: #16a34a;
-    color: #ffffff;
-    border-color: #16a34a;
+/* Ajuste del rojo para el modo oscuro */
+body.dark-mode #form-reporte.fue-validado input:invalid,
+body.dark-mode #form-reporte.fue-validado textarea:invalid,
+body.dark-mode #form-reporte.fue-validado select:invalid {
+  border: 2px solid var(--color-error);
+  background-color: var(--color-error-fondo);
 }
 
-.btn-guardar:hover {
-    background-color: #15803d;
-    color: #ffffff;
+/* Estilos para el botón del menú */
+.btn-oscuro {
+  background-color: transparent;
+  color: var(--color-blanco);
+  border: 1px solid var(--color-blanco);
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radio-borde);
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
 }
 
-.btn-eliminar {
-    background-color: #fee2e2;
-    color: #dc2626;
-    border-color: #fecaca;
+.btn-oscuro:hover {
+  background-color: var(--color-blanco);
+  color: var(--color-primario);
 }
 
-.btn-eliminar:hover:not(:disabled) {
-    background-color: #dc2626;
-    color: #ffffff;
+/* En modo oscuro, ajustamos el fondo del contador */
+body.dark-mode .contador-badge {
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
-.btn-eliminar:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-    background-color: #f1f5f9;
-    color: #94a3b8;
-    border-color: #e2e8f0;
+/* Modo Oscuro */
+body.dark-mode {
+  --color-fondo: #121212;
+  --color-tarjeta: #1e1e1e;
+  --color-tarjeta-caso: #2a2a2a;
+  --color-texto: #e0e0e0;
+  --color-texto-secundario: #aaaaaa;
+  --color-borde: #444444;
+  --color-input-fondo: #2c2c2c;
+  --color-error-fondo: #3b1a1a;
 }
 
-/* Badge de archivo PDF */
-.badge-pdf {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    background-color: #fee2e2;
-    color: #b91c1c;
-    border: 1px solid #fecaca;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-decoration: none;
-    margin-top: 5px;
-    transition: all 0.2s ease;
+/* Ajustes para los bordes e inputs en modo oscuro */
+body.dark-mode .tarjeta-caso {
+  background-color: var(--color-tarjeta-caso);
+  border-color: var(--color-borde);
 }
 
-.badge-pdf:hover {
-    background-color: #ef4444;
-    color: #ffffff;
-    border-color: #ef4444;
+body.dark-mode .tarjeta-caso .meta {
+  color: var(--color-texto-secundario);
 }
 
-/* Ocultar acciones y formularios si NO está activo el modo edición general */
-body:not(.modo-edicion-activo) .item-actions,
-body:not(.modo-edicion-activo) .formulario-agregar {
-    display: none !important;
+body.dark-mode .campo input,
+body.dark-mode .campo textarea,
+body.dark-mode .campo select {
+  background-color: var(--color-input-fondo);
+  color: var(--color-blanco);
+  border-color: var(--color-borde);
 }
 
-/* Formulario de agregar */
-.formulario-agregar {
-    background-color: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 14px;
-    margin-top: 14px;
+.item-modo-oscuro {
+  margin-left: auto;
+  justify-content: center;
 }
 
-.form-title {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--text-navy-dark);
-}
-
-.form-select,
-.form-control {
-    font-size: 0.85rem;
-    border-color: #cbd5e1;
-}
-
-.form-select:focus,
-.form-control:focus {
-    border-color: var(--color-accent-badge);
-    box-shadow: 0 0 0 0.2rem rgba(83, 107, 142, 0.2);
-}
-
-/* Barra de habilidades */
-.skill-name {
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--text-navy-dark);
-}
-
-.skill-percent {
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: var(--text-muted);
-}
-
-.custom-progress {
-    height: 6px;
-    background-color: #e2e8f0;
-    border-radius: 3px;
-}
-
-.custom-progress .progress-bar {
-    background-color: var(--color-progress);
-    border-radius: 3px;
-}
-
-/* Botón principal */
-.btn-navy {
-    background-color: #1e293b;
-    color: #ffffff;
-    font-size: 0.85rem;
-    font-weight: 600;
-    padding: 6px 16px;
-    border-radius: 6px;
-    border: none;
-    transition: background-color 0.2s ease;
-}
-
-.btn-navy:hover {
-    background-color: #0f172a;
-    color: #ffffff;
-}
-
-/* Footer */
-.portfolio-footer p {
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-}
-
-/* Ajustes Responsivos */
+/* Responsive */
 @media (max-width: 768px) {
-    .portfolio-card {
-        padding: 30px 20px;
-    }
 
-    .user-name {
-        font-size: 1.5rem;
-        letter-spacing: 2px;
-    }
+  /* Apila los elementos del menú */
+  .main-nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+  }
 
-    .user-title {
-        font-size: 0.75rem;
-        letter-spacing: 2px;
-    }
+  .item-modo-oscuro {
+    margin-left: 0;
+  }
 
-    .contact-bar {
-        flex-direction: column;
-        gap: 8px !important;
-        align-items: center;
-    }
+  /* Centra el título */
+  .site-header {
+    text-align: center;
+  }
 
-    .portfolio-item {
-        flex-direction: column;
-        gap: 8px;
-    }
+  /* Ubica el contador de casos */
+  .contador-badge {
+    display: block;
+    width: fit-content;
+    margin: 0.6rem auto 0 auto;
+  }
 
-    .item-actions {
-        align-self: flex-end;
-    }
+  /* Apila los inputs de los filtros */
+  #controles-filtros {
+    flex-direction: column;
+  }
 }

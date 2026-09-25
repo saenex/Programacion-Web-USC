@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cali Vigilante - Casos Registrados</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body id="body">
+    <header class="site-header">
+        <h1>Cali Vigilante</h1>
+        <p>Registro ciudadano de presuntos abusos de autoridad. <span id="contador-cabecera"
+                class="contador-badge"></span></p>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="reportar.html">Reportar un caso</a></li>
+                <li><a href="casos.html">Ver casos registrados</a></li>
+                <li class="item-modo-oscuro"><button id="btn-modo-oscuro" class="btn-oscuro">Modo Oscuro</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <!--Sección de búsqueda y filtros-->
+        <section id="herramientas-busqueda" aria-labelledby="titulo_filtros">
+            <h2 id="titulo_filtros">Buscar y Filtrar Casos</h2>
+
+            <div id="controles-filtros" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div class="campo" style="flex: 1; min-width: 250px;">
+                    <label for="busqueda">Buscar por lugar o palabra clave:</label>
+                    <input type="text" id="busqueda" placeholder="Ej: Loma de la cruz...">
+                    <div class="campo" style="flex: 1; min-width: 200px; justify-content: flex-end;">
+                        <button id="btn-ordenar" class="btn-ordenar">Más recientes</button>
+                    </div>
+                </div>
+
+                <div class="campo" style="flex: 1; min-width: 250px;">
+                    <label for="filtro-autoridad">Filtrar por autoridad:</label>
+                    <select id="filtro-autoridad">
+                        <option value="todas">Todas las autoridades</option>
+                        <option value="policia">Policía Nacional</option>
+                        <option value="esmad">ESMAD</option>
+                        <option value="ejercito">Ejército</option>
+                        <option value="cruz-roja">Cruz Roja</option>
+                        <option value="alcaldia">Alcaldía</option>
+                        <option value="extranjero">Extranjero</option>
+                        <option value="otra">Otra</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contenedor original de las tarjetas -->
+        <section id="lista_casos" aria-labelledby="titulo_casos">
+            <h2 id="titulo_casos">Casos registrados</h2>
+            <div id="contenedor-casos" class="casos-grid">
+                <!-- Aquí JavaScript insertará las tarjetas de cada reporte -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Proyecto inicial - Programación Orientada a la Web - Universidad Santiago de Cali - 2026B</p>
+        <p>última actualización: Agosto 22 de 2026</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

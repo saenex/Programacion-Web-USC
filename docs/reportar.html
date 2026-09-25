@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cali Vigilante - Reportar Caso</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body id="body">
+    <header class="site-header">
+        <h1>Cali Vigilante</h1>
+        <p>Registro ciudadano de presuntos abusos de autoridad. <span id="contador-cabecera"
+                class="contador-badge"></span></p>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="reportar.html">Reportar un caso</a></li>
+                <li><a href="casos.html">Ver casos registrados</a></li>
+                <li class="item-modo-oscuro"><button id="btn-modo-oscuro" class="btn-oscuro">Modo Oscuro</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section id="formulario" aria-labelledby="titulo_form">
+            <h2 id="titulo_form">Registrar nuevo caso</h2>
+            <form id="form-reporte">
+                <div class="campo">
+                    <label for="fecha">Fecha del incidente</label>
+                    <input type="date" id="fecha" name="fecha" required
+                        oninvalid="this.setCustomValidity('Por favor, selecciona la fecha del incidente.')"
+                        oninput="this.setCustomValidity('')">
+                </div>
+
+                <div class="campo">
+                    <label for="lugar">Lugar del incidente (Barrio, Comuna, Sitio)</label>
+                    <!-- Validamos longitud mínima y que solo contenga letras, números y espacios -->
+                    <input type="text" id="lugar" name="lugar" placeholder="Ej: Loma de la cruz" required minlength="5"
+                        pattern="[a-zA-Z0-9\s.,ñÑáéíóúÁÉÍÓÚ]+"
+                        oninvalid="this.setCustomValidity('Ingresa un lugar válido (mínimo 5 caracteres, sin símbolos extraños).')"
+                        oninput="this.setCustomValidity('')">
+                </div>
+
+                <div class="campo">
+                    <label for="descripcion">Descripción del hecho</label>
+                    <!-- Validamos una longitud mínima para asegurar que el reporte tenga detalle -->
+                    <textarea id="descripcion" name="descripcion" rows="4" required minlength="20"
+                        oninvalid="this.setCustomValidity('La descripción debe tener al menos 20 caracteres para ser válida.')"
+                        oninput="this.setCustomValidity('')"></textarea>
+                </div>
+
+                <div class="campo">
+                    <label for="autoridad">Autoridad involucrada</label>
+                    <select id="autoridad" name="autoridad">
+                        <option value="policia">Policía Nacional</option>
+                        <option value="esmad">ESMAD</option>
+                        <option value="ejercito">Ejército</option>
+                        <option value="cruz-roja">Cruz Roja</option>
+                        <option value="alcaldia">Alcaldía</option>
+                        <option value="extranjero">Extranjero</option>
+                        <option value="otra">Otra</option>
+                    </select>
+                </div>
+
+                <button type="submit">Enviar Reporte</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>Proyecto inicial - Programación Orientada a la Web - Universidad Santiago de Cali - 2026B</p>
+        <p>última actualización: Agosto 22 de 2026</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

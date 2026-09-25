@@ -1,338 +1,160 @@
-// Alternar modo de edición general del portafolio
-function toggleModoGeneralEdicion() {
-    const body = document.body;
-    const btn = document.getElementById('btn-toggle-edicion');
-    const textoBtn = document.getElementById('texto-btn-edicion');
-    const iconoBtn = btn.querySelector('i');
+const formulario = document.getElementById('form-reporte');
+const contenedorCasos = document.getElementById('contenedor-casos');
+const inputBusqueda = document.getElementById('busqueda');
+const filtroAutoridad = document.getElementById('filtro-autoridad');
+const contadorCabecera = document.getElementById('contador-cabecera');
+const btnSubmit = document.querySelector('#form-reporte button[type="submit"]');
+const btnModoOscuro = document.getElementById('btn-modo-oscuro');
+const btnOrdenar = document.getElementById('btn-ordenar');
+const API_URL = 'https://jsonplaceholder.typicode.com/posts';
 
-    const activo = body.classList.toggle('modo-edicion-activo');
-    btn.classList.toggle('active', activo);
+//
+async function obtenerCasos() {
+    try {
+        // realizar petición HTTP
+        const response = await fetch(`${API_URL}?_limit=6`);
 
-    if (activo) {
-        textoBtn.textContent = 'Finalizar Edición';
-        iconoBtn.className = 'bi bi-check2-circle';
-    } else {
-        textoBtn.textContent = 'Modificar Portafolio';
-        iconoBtn.className = 'bi bi-pencil-square';
+        // Indicar si el servidor respondió con un código dew éxito (200-299)
+        if (response.ok) {
+        throw new Error(`Error en la petición: ${response.status}`);
+        }   
+
+        // Convertir la respuesta a JSON
+        const datos = await response.json();
+        casos = datos;
+        renderizarCasos(casos);
+        actualizarContador();
+
+    } catch (error) {
+        console.error('Error al obtener casos:', error);
+        mostrarNotificacion('Error al obtener casos. Por favor, intenta de nuevo más tarde.');
     }
 }
 
-// Modificar campos específicos de un elemento de historial
-function toggleModificar(btn) {
-    const item = btn.closest('.portfolio-item');
-    const content = item.querySelector('.item-content');
-    const deleteBtn = item.querySelector('.btn-eliminar');
-    const isEditing = item.classList.contains('is-editing');
+// Request asincrono al servidor
+const respuesta = await fetch(API_URL);
+const datos = await respuesta.json();
 
-    if (!isEditing) {
-        // Habilitar modo de edición en el item
-        item.classList.add('is-editing');
-        const headingEl = content.querySelector('.item-heading');
-        const subEl = content.querySelector('.item-sub');
-        const pdfLink = content.querySelector('.badge-pdf');
 
-        const headingVal = headingEl ? headingEl.textContent.trim() : '';
-        const subVal = subEl ? subEl.textContent.trim() : '';
-        const pdfVal = pdfLink ? pdfLink.getAttribute('href') : '';
 
-        content.dataset.prevHeading = headingVal;
-        content.dataset.prevSub = subVal;
-        content.dataset.prevPdf = pdfVal;
 
-        content.innerHTML = `
-            <input type="text" class="form-control form-control-sm mb-1 edit-heading" value="${headingVal}" placeholder="Título o Cargo">
-            <input type="text" class="form-control form-control-sm mb-1 edit-sub" value="${subVal}" placeholder="Institución / Empresa / Año">
-            <select class="form-select form-select-sm edit-pdf">
-                <option value="">Sin archivo PDF</option>
-                <option value="archivos/TÉCNICO EN SISTEMAS - SENA.pdf" ${pdfVal.includes('TÉCNICO') ? 'selected' : ''}>TÉCNICO EN SISTEMAS - SENA.pdf</option>
-                <option value="archivos/Inteligencia Artificial Nivel Básico.pdf" ${pdfVal.includes('Inteligencia') ? 'selected' : ''}>Inteligencia Artificial Nivel Básico.pdf</option>
-            </select>
-        `;
+// Estado inicial
+let casos = JSON.parse(localStorage.getItem('casos_cali_vigilante')) || [];
+let ordenDescendente = true;
 
-        btn.classList.remove('btn-modificar');
-        btn.classList.add('btn-guardar');
-        btn.innerHTML = '<i class="bi bi-check-lg"></i> Guardar';
-
-        // Habilitar el botón de eliminación tras presionar modificar
-        if (deleteBtn) {
-            deleteBtn.disabled = false;
-        }
-    } else {
-        // Guardar cambios efectuados
-        const headingInput = content.querySelector('.edit-heading');
-        const subInput = content.querySelector('.edit-sub');
-        const pdfSelect = content.querySelector('.edit-pdf');
-
-        const newHeading = headingInput.value.trim() || content.dataset.prevHeading || 'Sin título';
-        const newSub = subInput.value.trim();
-        const newPdf = pdfSelect.value.trim();
-
-        let pdfHtml = '';
-        if (newPdf) {
-            const nombrePdf = newPdf.split('/').pop();
-            pdfHtml = `
-                <div>
-                    <a href="${newPdf}" target="_blank" class="badge-pdf">
-                        <i class="bi bi-file-earmark-pdf-fill"></i> ${nombrePdf}
-                    </a>
-                </div>
-            `;
-        }
-
-        content.innerHTML = `
-            <h3 class="item-heading">${newHeading}</h3>
-            ${newSub ? `<p class="item-sub">${newSub}</p>` : ''}
-            ${pdfHtml}
-        `;
-
-        item.classList.remove('is-editing');
-        btn.classList.remove('btn-guardar');
-        btn.classList.add('btn-modificar');
-        btn.innerHTML = '<i class="bi bi-pencil-fill"></i> Modificar';
-
-        // Bloquear nuevamente eliminar
-        if (deleteBtn) {
-            deleteBtn.disabled = true;
-        }
-    }
+function guardarEnLocalStorage() {
+    localStorage.setItem('casos_cali_vigilante', JSON.stringify(casos));
 }
 
-// Modificar campos de habilidades / tech stack
-function toggleModificarHabilidad(btn) {
-    const item = btn.closest('.skill-item');
-    const headerRow = item.querySelector('.skill-header-row');
-    const deleteBtn = item.querySelector('.btn-eliminar');
-    const progressBar = item.querySelector('.progress-bar');
-    const isEditing = item.classList.contains('is-editing');
-
-    if (!isEditing) {
-        item.classList.add('is-editing');
-        const nameEl = headerRow.querySelector('.skill-name');
-        const percentEl = headerRow.querySelector('.skill-percent');
-
-        const nameVal = nameEl ? nameEl.textContent.trim() : '';
-        const percentVal = percentEl ? parseInt(percentEl.textContent) || 50 : 50;
-
-        item.dataset.prevName = nameVal;
-        item.dataset.prevPercent = percentVal;
-
-        nameEl.style.display = 'none';
-        if (percentEl) percentEl.style.display = 'none';
-
-        const editInputs = document.createElement('div');
-        editInputs.className = 'edit-skill-inputs d-flex gap-2 flex-grow-1 me-2';
-        editInputs.innerHTML = `
-            <input type="text" class="form-control form-control-sm edit-habilidad-nombre" value="${nameVal}" placeholder="Habilidad">
-            <input type="number" min="1" max="100" class="form-control form-control-sm edit-habilidad-nivel" style="width: 75px;" value="${percentVal}" placeholder="%">
-        `;
-        headerRow.insertBefore(editInputs, headerRow.querySelector('.item-actions'));
-
-        btn.classList.remove('btn-modificar');
-        btn.classList.add('btn-guardar');
-        btn.innerHTML = '<i class="bi bi-check-lg"></i> Guardar';
-
-        if (deleteBtn) {
-            deleteBtn.disabled = false;
-        }
-    } else {
-        const nameInput = headerRow.querySelector('.edit-habilidad-nombre');
-        const percentInput = headerRow.querySelector('.edit-habilidad-nivel');
-
-        const newName = nameInput.value.trim() || item.dataset.prevName || 'Habilidad';
-        let newPercent = parseInt(percentInput.value);
-        if (isNaN(newPercent) || newPercent < 0) newPercent = 0;
-        if (newPercent > 100) newPercent = 100;
-
-        const inputsWrapper = headerRow.querySelector('.edit-skill-inputs');
-        if (inputsWrapper) inputsWrapper.remove();
-
-        let nameEl = headerRow.querySelector('.skill-name');
-        let percentEl = headerRow.querySelector('.skill-percent');
-
-        nameEl.textContent = newName;
-        nameEl.style.display = '';
-
-        if (!percentEl) {
-            percentEl = document.createElement('span');
-            percentEl.className = 'skill-percent ms-auto me-2';
-            headerRow.insertBefore(percentEl, headerRow.querySelector('.item-actions'));
-        }
-        percentEl.textContent = `${newPercent}%`;
-        percentEl.style.display = '';
-
-        if (progressBar) {
-            progressBar.style.width = `${newPercent}%`;
-        }
-
-        item.classList.remove('is-editing');
-        btn.classList.remove('btn-guardar');
-        btn.classList.add('btn-modificar');
-        btn.innerHTML = '<i class="bi bi-pencil-fill"></i> Modificar';
-
-        if (deleteBtn) {
-            deleteBtn.disabled = true;
-        }
-    }
+function crearTarjetaCaso(caso) {
+    const tarjeta = document.createElement('article');
+    tarjeta.className = 'tarjeta-caso';
+    tarjeta.innerHTML = `
+        <h3>${caso.lugar}</h3>
+        <p class="meta">${caso.fecha} · ${caso.autoridad.toUpperCase()}</p>
+        <p>${caso.descripcion}</p>
+    `;
+    return tarjeta;
 }
 
-// Eliminar un elemento individual (estudio, trabajo o habilidad)
-function eliminarItem(btn) {
-    if (btn.disabled) return;
-    const item = btn.closest('.portfolio-item') || btn.closest('.skill-item');
-    if (item && confirm('¿Deseas eliminar este registro?')) {
-        item.remove();
-    }
+function actualizarContador() {
+    if (!contadorCabecera) return;
+    const total = casos.length;
+    contadorCabecera.textContent = total === 1 ? '1 caso registrado' : `${total} casos registrados`;
 }
 
-// Agregar nuevo estudio con campos separados de título, institución y PDF
-function agregarEstudio() {
-    const tituloInput = document.getElementById('input-estudio-titulo');
-    const instInput = document.getElementById('input-estudio-institucion');
-    const pdfInput = document.getElementById('input-estudio-pdf');
+function renderizarCasos(casosAMostrar) {
+    if (!contenedorCasos) return;
 
-    const titulo = tituloInput.value.trim();
-    const institucion = instInput.value.trim();
-    const pdf = pdfInput ? pdfInput.value.trim() : '';
-
-    if (!titulo) {
-        alert('Por favor escribe el nombre del estudio o curso.');
+    contenedorCasos.innerHTML = '';
+    if (casosAMostrar.length === 0) {
+        contenedorCasos.innerHTML = '<p>No se encontraron casos que coincidan con la búsqueda.</p>';
         return;
     }
 
-    let pdfHtml = '';
-    if (pdf) {
-        const nombrePdf = pdf.split('/').pop();
-        pdfHtml = `
-            <div>
-                <a href="${pdf}" target="_blank" class="badge-pdf">
-                    <i class="bi bi-file-earmark-pdf-fill"></i> ${nombrePdf}
-                </a>
-            </div>
-        `;
-    }
-
-    const lista = document.getElementById('lista-academica');
-    const nuevoItem = document.createElement('div');
-    nuevoItem.className = 'portfolio-item d-flex justify-content-between align-items-start gap-2';
-    nuevoItem.innerHTML = `
-        <div class="d-flex align-items-start gap-2 flex-grow-1">
-            <span class="item-bullet"></span>
-            <div class="item-content flex-grow-1">
-                <h3 class="item-heading">${titulo}</h3>
-                ${institucion ? `<p class="item-sub">${institucion}</p>` : ''}
-                ${pdfHtml}
-            </div>
-        </div>
-        <div class="item-actions d-flex gap-1">
-            <button type="button" class="btn-action btn-modificar" onclick="toggleModificar(this)" title="Modificar">
-                <i class="bi bi-pencil-fill"></i> Modificar
-            </button>
-            <button type="button" class="btn-action btn-eliminar" disabled onclick="eliminarItem(this)" title="Eliminar (requiere habilitar modificación)">
-                <i class="bi bi-trash-fill"></i> Eliminar
-            </button>
-        </div>
-    `;
-    lista.appendChild(nuevoItem);
-
-    // Limpiar campos
-    tituloInput.value = '';
-    instInput.value = '';
-    if (pdfInput) pdfInput.value = '';
+    casosAMostrar.forEach(caso => contenedorCasos.appendChild(crearTarjetaCaso(caso)));
+    actualizarContador();
 }
 
-// Agregar nuevo trabajo con campos separados de cargo, empresa y PDF
-function agregarTrabajo() {
-    const cargoInput = document.getElementById('input-trabajo-cargo');
-    const empresaInput = document.getElementById('input-trabajo-empresa');
-    const pdfInput = document.getElementById('input-trabajo-pdf');
+function aplicarFiltros() {
+    const textoBusqueda = inputBusqueda?.value.toLowerCase() || '';
+    const autoridadSeleccionada = filtroAutoridad?.value || 'todas';
 
-    const cargo = cargoInput.value.trim();
-    const empresa = empresaInput.value.trim();
-    const pdf = pdfInput ? pdfInput.value.trim() : '';
+    const casosFiltrados = casos.filter(caso => {
+        const coincideTexto = caso.lugar.toLowerCase().includes(textoBusqueda) || 
+                              caso.descripcion.toLowerCase().includes(textoBusqueda);
+        const coincideAutoridad = autoridadSeleccionada === 'todas' || caso.autoridad === autoridadSeleccionada;
+        
+        return coincideTexto && coincideAutoridad;
+    });
 
-    if (!cargo) {
-        alert('Por favor escribe el cargo o puesto.');
-        return;
-    }
-
-    let pdfHtml = '';
-    if (pdf) {
-        const nombrePdf = pdf.split('/').pop();
-        pdfHtml = `
-            <div>
-                <a href="${pdf}" target="_blank" class="badge-pdf">
-                    <i class="bi bi-file-earmark-pdf-fill"></i> ${nombrePdf}
-                </a>
-            </div>
-        `;
-    }
-
-    const lista = document.getElementById('lista-laboral');
-    const nuevoItem = document.createElement('div');
-    nuevoItem.className = 'portfolio-item d-flex justify-content-between align-items-start gap-2';
-    nuevoItem.innerHTML = `
-        <div class="d-flex align-items-start gap-2 flex-grow-1">
-            <span class="item-bullet"></span>
-            <div class="item-content flex-grow-1">
-                <h3 class="item-heading">${cargo}</h3>
-                ${empresa ? `<p class="item-sub">${empresa}</p>` : ''}
-                ${pdfHtml}
-            </div>
-        </div>
-        <div class="item-actions d-flex gap-1">
-            <button type="button" class="btn-action btn-modificar" onclick="toggleModificar(this)" title="Modificar">
-                <i class="bi bi-pencil-fill"></i> Modificar
-            </button>
-            <button type="button" class="btn-action btn-eliminar" disabled onclick="eliminarItem(this)" title="Eliminar (requiere habilitar modificación)">
-                <i class="bi bi-trash-fill"></i> Eliminar
-            </button>
-        </div>
-    `;
-    lista.appendChild(nuevoItem);
-
-    // Limpiar campos
-    cargoInput.value = '';
-    empresaInput.value = '';
-    if (pdfInput) pdfInput.value = '';
+    renderizarCasos(casosFiltrados);
 }
 
-// Agregar nueva habilidad
-function agregarHabilidad() {
-    const nombreInput = document.getElementById('input-habilidad-nombre');
-    const nivelInput = document.getElementById('input-habilidad-nivel');
+function mostrarNotificacion(mensaje) {
+    const notificacion = document.createElement('div');
+    notificacion.className = 'notificacion-popup';
+    notificacion.textContent = mensaje;
+    document.body.appendChild(notificacion);
 
-    const nombre = nombreInput.value.trim();
-    let nivel = parseInt(nivelInput.value);
+    setTimeout(() => notificacion.classList.add('mostrar'), 10);
 
-    if (!nombre) {
-        alert('Por favor ingresa el nombre de la habilidad.');
-        return;
-    }
-    if (isNaN(nivel) || nivel < 1) nivel = 50;
-    if (nivel > 100) nivel = 100;
-
-    const lista = document.getElementById('lista-habilidades');
-    const nuevoItem = document.createElement('div');
-    nuevoItem.className = 'skill-item mb-3';
-    nuevoItem.innerHTML = `
-        <div class="skill-header-row d-flex justify-content-between align-items-center mb-1">
-            <span class="skill-name">${nombre}</span>
-            <span class="skill-percent ms-auto me-2">${nivel}%</span>
-            <div class="item-actions d-flex gap-1">
-                <button type="button" class="btn-action btn-modificar" onclick="toggleModificarHabilidad(this)" title="Modificar">
-                    <i class="bi bi-pencil-fill"></i> Modificar
-                </button>
-                <button type="button" class="btn-action btn-eliminar" disabled onclick="eliminarItem(this)" title="Eliminar (requiere habilitar modificación)">
-                    <i class="bi bi-trash-fill"></i> Eliminar
-                </button>
-            </div>
-        </div>
-        <div class="progress custom-progress">
-            <div class="progress-bar" style="width: ${nivel}%"></div>
-        </div>
-    `;
-    lista.appendChild(nuevoItem);
-
-    nombreInput.value = '';
-    nivelInput.value = '';
+    setTimeout(() => {
+        notificacion.classList.remove('mostrar');
+        setTimeout(() => notificacion.remove(), 300);
+    }, 3500);
 }
+
+// Eventos principales
+formulario?.addEventListener('submit', function (evento) {
+    evento.preventDefault();
+
+    casos.push({
+        fecha: document.getElementById('fecha').value,
+        lugar: document.getElementById('lugar').value,
+        descripcion: document.getElementById('descripcion').value,
+        autoridad: document.getElementById('autoridad').value,
+    });
+
+    guardarEnLocalStorage();
+    mostrarNotificacion('¡Reporte enviado exitosamente! Puedes ir a "Ver casos registrados" para comprobarlo.');
+    
+    formulario.reset();
+    formulario.classList.remove('fue-validado');
+    actualizarContador();
+});
+
+btnSubmit?.addEventListener('click', () => formulario?.classList.add('fue-validado'));
+
+// Filtros de búsqueda
+inputBusqueda?.addEventListener('input', aplicarFiltros);
+filtroAutoridad?.addEventListener('change', aplicarFiltros);
+
+// Modo Oscuro
+if (localStorage.getItem('cali_vigilante_modo_oscuro') === 'activado') {
+    document.body.classList.add('dark-mode');
+    if (btnModoOscuro) btnModoOscuro.textContent = 'Modo Claro';
+}
+
+btnModoOscuro?.addEventListener('click', () => {
+    const estaActivo = document.body.classList.toggle('dark-mode');
+    localStorage.setItem('cali_vigilante_modo_oscuro', estaActivo ? 'activado' : 'desactivado');
+    btnModoOscuro.textContent = estaActivo ? 'Modo Claro' : 'Modo Oscuro';
+});
+
+// Ordenamiento por fecha
+btnOrdenar?.addEventListener('click', () => {
+    casos.sort((a, b) => {
+        const fechaA = new Date(a.fecha);
+        const fechaB = new Date(b.fecha);
+        return ordenDescendente ? fechaA - fechaB : fechaB - fechaA;
+    });
+
+    ordenDescendente = !ordenDescendente;
+    btnOrdenar.textContent = ordenDescendente ? 'Casos recientes' : 'Casos antiguos';
+    aplicarFiltros();
+});
+
+// Renderizado inicial
+renderizarCasos(casos);
+actualizarContador();
